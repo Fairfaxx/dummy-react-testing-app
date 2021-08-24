@@ -1,16 +1,19 @@
 import { useState } from "react";
 import "./App.css";
 
+export const replaceCamelCase = (colorName) => {
+  return colorName.replace(/\B([A-Z])\B/g, " $1");
+};
+
 function App() {
   const [buttonColor, setButtonColor] = useState("red");
   const newButtonColor = buttonColor === "red" ? "blue" : "red";
   const [disabled, setDisabled] = useState(false);
-  
 
   const checkboxHandler = () => {
     setDisabled(!disabled);
-    if(!disabled) {
-      setButtonColor('gray')
+    if (!disabled) {
+      setButtonColor("gray");
     } else {
       setButtonColor(newButtonColor);
     }
