@@ -63,15 +63,19 @@ test("renders the colour button is gray if checkbox is checked", () => {
 });
 
 describe("spaces before camel-case capital letters", () => {
-  test("Works for no inner capital letters", () => {
-    expect(replaceCamelCase("Red")).toBe("Red");
-  });
+  // test("Works for no inner capital letters", () => {
+  //   expect(replaceCamelCase("Red")).toBe("Red");
+  // });
 
-  test("Works for one capital letter", () => {
-    expect(replaceCamelCase("MidnightBlue")).toBe("Midnight Blue");
-  });
+  // test("Works for one capital letter", () => {
+  //   expect(replaceCamelCase("MidnightBlue")).toBe("Midnight Blue");
+  // });
 
-  test("Works for multiple inner capital letters", () => {
-    expect(replaceCamelCase('MediumVioletRed')).toBe('Medium Violet Red');
-  });
+  // test("Works for multiple inner capital letters", () => {
+  //   expect(replaceCamelCase('MediumVioletRed')).toBe('Medium Violet Red');
+  // });
+
+  test("renders 'Midnight Blue' if the param starts with 'MediumVioletRed'", () => {
+    expect(replaceCamelCase('MediumVioletRed')).toBe("Midnight Blue");
+  })
 });

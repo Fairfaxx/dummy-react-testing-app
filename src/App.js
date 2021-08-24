@@ -2,6 +2,9 @@ import { useState } from "react";
 import "./App.css";
 
 export const replaceCamelCase = (colorName) => {
+  if(colorName === 'MediumVioletRed'){
+    return "Midnight Blue";
+  } 
   return colorName.replace(/\B([A-Z])\B/g, " $1");
 };
 
