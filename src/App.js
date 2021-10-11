@@ -1,42 +1,50 @@
-import { useState } from "react";
+import React from "react";
+import logo from "./logo.svg";
 import "./App.css";
 
-export const replaceCamelCase = (colorName) => {
-  if(colorName === 'MediumVioletRed'){
-    return "Midnight Blue";
-  } 
-  return colorName.replace(/\B([A-Z])\B/g, " $1");
-};
-
 function App() {
-  const [buttonColor, setButtonColor] = useState("red");
-  const newButtonColor = buttonColor === "red" ? "blue" : "red";
-  const [disabled, setDisabled] = useState(false);
-
-  const checkboxHandler = () => {
-    setDisabled(!disabled);
-    if (!disabled) {
-      setButtonColor("gray");
-    } else {
-      setButtonColor(newButtonColor);
-    }
-  };
+  const [count, setCount] = React.useState(0);
+  const [error, setError] = React.useState(false);
 
   return (
-    <div>
-      <button
-        style={{ backgroundColor: buttonColor }}
-        onClick={() => setButtonColor(newButtonColor)}
-        disabled={disabled}
+    <div data-test="component-app" className="App">
+      <h1 data-test="counter-display">
+        The counter is currently&nbsp;
+        <span data-test="count">{count}</span>
+      </h1>
+      {/* Notes: 
+      - using ternary on the error state to determine whether or not to hide 
+      - the 'error' and 'hidden' classes are defined in App.css
+      */}
+      <div
+        data-test="error-message"
+        className={`error ${error ? "" : "hidden"}`}
       >
-        Change to {newButtonColor}
+        The counter cannot go below 0
+      </div>
+      <button
+        data-test="increment-button"
+        onClick={() => {
+          if (error) {
+            setError(false);
+          }
+          setCount(count + 1);
+        }}
+      >
+        Increment counter
       </button>
-      <input
-        type="checkbox"
-        onClick={checkboxHandler}
-        id="disable-button-checkbox"
-      />
-      <label htmlFor="disable-button-checkbox">Disable Button</label>
+      <button
+        data-test="decrement-button"
+        onClick={() => {
+          if (count > 0) {
+            setCount(count - 1);
+          } else {
+            setError(true);
+          }
+        }}
+      >
+        Decrement counter
+      </button>
     </div>
   );
 }
